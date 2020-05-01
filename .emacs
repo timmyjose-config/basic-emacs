@@ -34,6 +34,19 @@
 (require-package 'zig-mode)
 (require-package 'deadgrep)
 (require-package 'fzf)
+(require-package 'forth-mode)
+(require-package 'rust-mode)
+(require-package 'haskell-mode)
+(require-package 'company)
+(require-package 'kotlin-mode)
+
+;;; hooks
+
+(autoload 'enable-paredit-mode "paredit" "enable paredit" t)
+(add-hook 'prog-mode-hook #'enable-paredit-mode)
+(add-hook 'prog-mode-hook (lambda () (electric-pair-mode 1)))
+(add-hook 'prog-mode-hook (lambda () (setq indent-tabs-mode nil)))
+(add-hook 'after-init-hook 'global-company-mode)
 
 ;;; basic config
 
@@ -50,16 +63,20 @@
 (load (expand-file-name "~/quicklisp/slime-helper.el"))
 (setq inferior-lisp-program "sbcl")
 
+;; rust
+
+(require 'rust-mode)
+(setq rust-format-on-save t)
+(add-hook 'rust-mode-hook #'racer-mode)
+(add-hook 'racer-mode-hook #'eldoc-mode)
+(add-hook 'racer-mode-hok #'company-mode)
+(define-key rust-mode-map (kbd "TAB") #'company-indent-or-complete-common)
+(setq company-tooltip-align-annotations t)
+
 ;;; fzf and ripgrep
 
 (global-set-key (kbd "M-g") #'deadgrep)
 (global-set-key (kbd "M-t") #'fzf)
-
-;;; hooks
-
-(autoload 'enable-paredit-mode "paredit" "enable paredit" t)
-(add-hook 'prog-mode-hook #'enable-paredit-mode)
-(add-hook 'prog-mode-hook (lambda () (electric-pair-mode 1))) 
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -68,7 +85,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (fzf projectile exec-path-from-shell zig-mode monokai paredit slime))))
+    (haskell-mode rust-mode forth-mode fzf projectile exec-path-from-shell zig-mode monokai paredit slime))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
