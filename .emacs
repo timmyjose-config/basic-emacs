@@ -59,6 +59,7 @@
 
 (autoload 'enable-paredit-mode "paredit" "enable paredit" t)
 (add-hook 'prog-mode-hook #'enable-paredit-mode)
+(add-hook 'prog-mode-hook (lambda () (electric-pair-mode 1))) 
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
