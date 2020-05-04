@@ -39,6 +39,7 @@
 (require-package 'haskell-mode)
 (require-package 'company)
 (require-package 'kotlin-mode)
+(require-package 'magit)
 
 ;;; hooks
 
@@ -85,7 +86,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (haskell-mode rust-mode forth-mode fzf projectile exec-path-from-shell zig-mode monokai paredit slime))))
+    (magit haskell-mode rust-mode forth-mode fzf projectile exec-path-from-shell zig-mode monokai paredit slime))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
